@@ -1,0 +1,49 @@
+.OtpScreen {
+    .otp-title {
+        display: inline;
+        text-align: center;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .otp-info {
+        color: #9d9898;
+        text-align: center;
+    }
+
+    .otp-box {
+        padding-left: 20px;
+        padding-top: 20px;
+        .otp {
+            width: 30px;
+            height: 30px;
+            background: whitesmoke;
+            color: #686363;
+            font-size: 25px;
+            padding: 5px 5px 5px 10px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            display: inline;
+            outline: none;
+            text-transform: capitalize;
+        }
+    }
+
+
+    
+    .resend-otp {
+        text-align: right;
+        padding-right: 25%;
+        color: gray;
+        font-size: 12px;
+    }
+
+    .go-back {
+        text-align: center;
+        font-weight: bold;
+        color: black;
+        font-size: 15px;
+        padding-top: 5px;
+    }
+        
+}

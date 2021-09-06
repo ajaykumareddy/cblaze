@@ -1,0 +1,17 @@
+$base-color: #116ae7;
+
+.Button {
+    background-color:$base-color;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 auto;
+    cursor: pointer;
+    padding: 10px 24px;
+    width: 100px;
+    font-weight: 600;
+    text-transform: capitalize;
+    border-radius: 2px;
+}

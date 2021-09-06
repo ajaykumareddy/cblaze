@@ -1,0 +1,56 @@
+.Login {
+
+    .login-title {
+        display: inline;
+        text-align: center;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .login-body {
+        padding: 0 30px;
+    }
+    
+    .has-account {
+        text-align: center;
+        span {
+            display: inline-block; 
+        }
+        .register{
+            a {
+                color: #116ae7;
+                font-weight: 700;
+                &:active{
+                    color: #116ae7;
+                    font-weight: 700;
+                }
+            }
+            
+        }
+    }
+}
+
+
+
+.form-controls {
+    -webkit-text-size-adjust: 100%;
+    font-family: Verdana,sans-serif;
+    line-height: 1.5;
+    color: #000;
+    box-sizing: inherit;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    font-size: 15px;
+    input {
+        outline: none;
+        -webkit-text-size-adjust: 100%;
+        box-sizing: inherit;
+        font: inherit;
+        margin: 0;
+        overflow: visible;
+        padding: 8px;
+        display: block;
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+}
