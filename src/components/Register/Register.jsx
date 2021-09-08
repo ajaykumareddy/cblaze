@@ -1,37 +1,61 @@
 import React from "react";
 import './register.scss'
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, withRouter} from "react-router-dom";
 import Button from "../lib/Button/Button";
 import TextField from "../lib/TextField/TextField";
+import ENDPOINT from "../../config/endpoints";
 
 class Register extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = { schoolName: '' }
+        this.state = {
+            schoolName: '',
+            email: '',
+            phone: '',
+            address:''
+        };
 
         this.schoolEmail = React.createRef();
         this.phone = React.createRef();
         this.schoolAddress = React.createRef();
-
         this.registerClick = this.registerClick.bind(this);
-
-        this.setSchoolNmae = this.setSchoolNmae.bind(this);
-
+        this.setSchoolName = this.setSchoolName.bind(this);
     }
 
-    setSchoolNmae(schoolName) {
+    setSchoolName(schoolName) {
         this.setState({ schoolName: schoolName }, () => {
             console.log(this.state.schoolName);
         });
     }
 
+    validForm() {
+        let valid = true;
+        if(this.state.schoolName.length === 0) {
+            valid = false;
+        }
+        return valid;
+    }
+
     registerClick() {
         const { schoolName } = this.state;
-        axios.post('/registerSchool', { schoolName: schoolName, email: this.schoolEmail.current.value, phone: this.phone.current.value, schoolAddress: this.schoolAddress.current.value }).then(function () {
-            console.log('test');
+        const { history} = this.props;
+        if(!this.validForm()) {
+            return;
+        }
+        axios.post(ENDPOINT.REGISTER, {
+            name: schoolName,
+            email: this.schoolEmail.current.value,
+            phone: parseInt(this.phone.current.value),
+         //   schoolAddress: this.schoolAddress.current.value,
+            type: 1
+        }).then(function (response) {
+            console.log(response);
+            window.sessionStorage.setItem('token' , response.data.token.access_token)
+            history.push('/verifyotp', {userId: response.data.user.id});
+        }).catch(function (error) {
+            console.log(error);
         });
     }
 
@@ -41,10 +65,9 @@ class Register extends React.Component {
                 <div className="register-title">
                     <p>Register your School</p>
                 </div>
-
                 <div className="register-body">
                     <div>
-                        <TextField title="School Name" placeholder="Enter Your School Name" autoFocus={true} inputHandler={this.setSchoolNmae} />
+                        <TextField title="School Name" placeholder="Enter Your School Name" autoFocus={true} inputHandler={this.setSchoolName} />
                     </div>
                     {/* <div className="form-controls">
                     <label>School Name</label>
@@ -70,22 +93,21 @@ class Register extends React.Component {
                             <input type="text" placeholder="Enter Your Address" ref={this.schoolAddress} />
                         </div>
                     </div>
-                    <Link to="/verifyotp">
+                    {/*<Link to="/verifyotp">
                         <div>
                             <Button name="Register" clickHandler={this.registerClick} />
                         </div>
-                    </Link>
+                    </Link>*/}
+
+                        <div>
+                            <Button name="Register" clickHandler={this.registerClick} />
+                        </div>
+
                     <div className="no-account">
                         <span>Already have Account?</span><span className="login"><Link to="/">Login</Link></span>
                     </div>
-
                 </div>
-
-
             </div>);
     }
-
 }
-
-
-export default Register;
+export default withRouter(Register);

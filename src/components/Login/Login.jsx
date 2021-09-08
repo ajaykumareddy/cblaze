@@ -3,28 +3,26 @@ import './Login.scss';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import Button from "../lib/Button/Button";
+import ENDPOINT from "../../config/endpoints";
 
 class Login extends React.Component {
 
-
     constructor(props) {
         super(props);
-
         this.email = React.createRef();
         this.password = React.createRef();
-
         this.login = this.login.bind(this);
-
     }
 
-
     login() {
-
-        axios.post('/login',{email: this.email.current.value,password: this.password.current.value}).then(function(){
-            console.log('login')
-        })
-
-
+        axios.post(ENDPOINT.LOGIN,{
+            email: this.email.current.value,
+            password: this.password.current.value}
+        ).then(function(error) {
+          window.alert('Login Successful');
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     render() {
@@ -57,7 +55,6 @@ class Login extends React.Component {
                 </div>
             </div>);
     }
-
 }
 
 export default Login;

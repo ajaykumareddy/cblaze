@@ -1,12 +1,12 @@
 import React from "react";
 import './Password.scss'
 
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from "axios";
 import Button from "../lib/Button/Button";
+import ENDPOINT from "../../config/endpoints";
 
 class Password extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -18,7 +18,6 @@ class Password extends React.Component {
 
         this.password = React.createRef();
         this.cnfPassword = React.createRef();
-
         this.setPassword = this.setPassword.bind(this);
         this.checkPassword = this.checkPassword.bind(this);
 
@@ -30,12 +29,15 @@ class Password extends React.Component {
 
 
     setPassword() {
+        const { history, location} = this.props;
         if(this.password.current.value.length > 0 && !this.mismatch) {
-            axios.post('/setPassword' , {password: this.password.current.value}).then(function() {
-                console.log('password done')
+            axios.post(ENDPOINT.SET_PASSWORD , {id: location.state.userId, password: this.password.current.value}).then(function() {
+                history.push('/');
+            }).catch(function (error) {
+                console.log(error);
+
             })
         }
-
     }
 
     render() {
@@ -66,7 +68,6 @@ class Password extends React.Component {
             </Link>
         </div>);
     }
-
 }
 
-export default Password;
+export default withRouter(Password);

@@ -1,9 +1,10 @@
 import React from 'react';
 import './OtpScreen.scss';
 
-import { Link } from 'react-router-dom';
+import { Link ,withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../lib/Button/Button';
+import ENDPOINT from "../../config/endpoints";
 
 
 class OtpScreen extends React.Component {
@@ -26,21 +27,22 @@ class OtpScreen extends React.Component {
     }
 
     submitOtp() {
+        const { history, location} = this.props;
         let digit1= this.otp1.current.value,digit2 = this.otp2.current.value,digit3 = this.otp3.current.value,digit4 = this.otp4.current.value; 
 
         if(digit1 && digit2 && digit3 && digit4) {
-            axios.post('/verifyOtp',{opt: ''+digit1+digit2+digit3+digit4}).then(function(){
-                console.log('otp verified');
+            axios.post(ENDPOINT.VERIFY_OTP,{userId: location.state.userId, otp: ''+digit1+digit2+digit3+digit4}).then(function(response){
+               history.push('/setpassword' , { userId: location.state.userId})
+            }).catch(function (error) {
+                console.log(error);
             })
         }
-
     }
 
     changeFocus(event) {
         if (event.target.value.length) {
             event.target.nextElementSibling.focus()
         }
-
     }
 
 
@@ -70,11 +72,16 @@ class OtpScreen extends React.Component {
                 <input className="otp otp-4" type="text" maxLength="1" ref={this.otp4} />
             </div>
 
-            <Link to="/setpassword">
-                <div>
-                   <Button name="Confirm" clickHandler={this.submitOtp} />
-                </div>
-            </Link>
+           {/* <Link to="/setpassword">
+            <div>
+                <Button name="Confirm" clickHandler={this.submitOtp} />
+            </div>
+        </Link>*/}
+
+            <div>
+                <Button name="Confirm" clickHandler={this.submitOtp} />
+            </div>
+
 
             <div className="resend-otp">
                 <span>resend otp in 00:{this.state.timer}</span>
@@ -91,4 +98,4 @@ class OtpScreen extends React.Component {
 
 }
 
-export default OtpScreen;
+export default withRouter(OtpScreen);
