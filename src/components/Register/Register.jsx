@@ -69,7 +69,7 @@ class Register extends React.Component {
                 </div>
                 <div className="register-body">
                     <div>
-                        <TextField title="School Name" placeholder="Enter Your School Name" autoFocus={true} inputHandler={this.setSchoolName} />
+                        <TextField title={t('SCHOOL.NAME')} placeholder={t('SCHOOL.PLACEHOLDER.NAME')} autoFocus={true} inputHandler={this.setSchoolName} />
                     </div>
                     {/* <div className="form-controls">
                     <label>School Name</label>
@@ -78,21 +78,21 @@ class Register extends React.Component {
                     </div>
                 </div> */}
                     <div className="form-controls">
-                        <label>Email</label>
+                        <label>{t('SCHOOL.EMAIL')}</label>
                         <div>
-                            <input type="text" placeholder="Enter your Email" ref={this.schoolEmail} />
+                            <input type="text" placeholder={t('SCHOOL.PLACEHOLDER.EMAIL')} ref={this.schoolEmail} />
                         </div>
                     </div>
                     <div className="form-controls">
-                        <label>Phone Number</label>
+                        <label>{t('SCHOOL.PHONE')}</label>
                         <div>
-                            <input type="text" placeholder="Enter Your Phone Number" ref={this.phone} />
+                            <input type="text" placeholder={t('SCHOOL.PLACEHOLDER.PHONE')} ref={this.phone} />
                         </div>
                     </div>
                     <div className="form-controls">
-                        <label>Address</label>
+                        <label>{t('SCHOOL.ADDRESS')}</label>
                         <div>
-                            <input type="text" placeholder="Enter Your Address" ref={this.schoolAddress} />
+                            <input type="text" placeholder={t('SCHOOL.PLACEHOLDER.ADDRESS')} ref={this.schoolAddress} />
                         </div>
                     </div>
                     {/*<Link to="/verifyotp">
@@ -102,11 +102,11 @@ class Register extends React.Component {
                     </Link>*/}
 
                         <div>
-                            <Button name="Register" clickHandler={this.registerClick} />
+                            <Button name={t('REGISTER')} clickHandler={this.registerClick} />
                         </div>
 
                     <div className="no-account">
-                        <span>Already have Account?</span><span className="login"><Link to="/">Login</Link></span>
+                        <span>{t('SCHOOL.EXISTING_ACCOUNT')}</span><span className="login"><Link to="/">{t('LOGIN')}</Link></span>
                     </div>
                 </div>
             </div>);

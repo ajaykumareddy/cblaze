@@ -1,5 +1,18 @@
 {
+  "REGISTER": "Register",
+  "LOGIN": "Login",
   "SCHOOL" : {
-    "REGISTER" : "Register your School"
+    "REGISTER": "Register your School",
+    "NAME": "School Name",
+    "EMAIL": "Email",
+    "PHONE": "Phone Number",
+    "ADDRESS": "Address",
+    "EXISTING_ACCOUNT": "Already have Account?",
+    "PLACEHOLDER": {
+      "NAME":"Enter Your School Name",
+      "EMAIL": "Enter your Email",
+      "PHONE": "Enter Your Phone Number",
+      "ADDRESS": "Enter Your Address"
+    }
   }
 }
