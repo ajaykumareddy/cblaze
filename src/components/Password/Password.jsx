@@ -32,6 +32,7 @@ class Password extends React.Component {
         const { history, location} = this.props;
         if(this.password.current.value.length > 0 && !this.mismatch) {
             axios.post(ENDPOINT.SET_PASSWORD , {id: location.state.userId, password: this.password.current.value}).then(function() {
+                sessionStorage.removeItem('token');
                 history.push('/');
             }).catch(function (error) {
                 console.log(error);

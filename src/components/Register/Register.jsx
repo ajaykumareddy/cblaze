@@ -2,6 +2,7 @@ import React from "react";
 import './register.scss'
 import axios from "axios";
 import { Link, withRouter} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 import Button from "../lib/Button/Button";
 import TextField from "../lib/TextField/TextField";
 import ENDPOINT from "../../config/endpoints";
@@ -52,7 +53,7 @@ class Register extends React.Component {
             type: 1
         }).then(function (response) {
             console.log(response);
-            window.sessionStorage.setItem('token' , response.data.token.access_token)
+            window.sessionStorage.setItem('token' , response.data.token.access_token);
             history.push('/verifyotp', {userId: response.data.user.id});
         }).catch(function (error) {
             console.log(error);
@@ -60,10 +61,11 @@ class Register extends React.Component {
     }
 
     render() {
+        const {t} = this.props;
         return (
             <div className="Register">
                 <div className="register-title">
-                    <p>Register your School</p>
+                    <p>{t('SCHOOL.REGISTER')}</p>
                 </div>
                 <div className="register-body">
                     <div>
@@ -110,4 +112,4 @@ class Register extends React.Component {
             </div>);
     }
 }
-export default withRouter(Register);
+export default withTranslation()(withRouter(Register));

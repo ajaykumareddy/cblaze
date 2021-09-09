@@ -18,7 +18,8 @@ class Login extends React.Component {
         axios.post(ENDPOINT.LOGIN,{
             email: this.email.current.value,
             password: this.password.current.value}
-        ).then(function(error) {
+        ).then(function(response) {
+            window.sessionStorage.setItem('token' , response.data.token.access_token);
           window.alert('Login Successful');
         }).catch(function (error) {
             console.log(error);
