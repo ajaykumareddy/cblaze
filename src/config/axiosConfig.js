@@ -5,7 +5,7 @@ axios.interceptors.request.use(function (config) {
     // Do something before request is sent
 
     if(window.sessionStorage.getItem('token').length != 0) {
-``        config.headers.Authorization = "Bearer " + window.sessionStorage.getItem('token');
+        config.headers.Authorization = "Bearer " + window.sessionStorage.getItem('token');
     }
     return config;
 }, function (error) {
