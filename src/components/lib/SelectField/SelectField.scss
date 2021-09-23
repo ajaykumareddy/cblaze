@@ -1,0 +1,31 @@
+@import "src/assets/styles/basecolor.scss";
+
+.SelectField {
+  input {
+    outline: none;
+  }
+  datalist {
+    position: absolute;
+    max-height: 20em;
+    border: 0 none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    option {
+      font-size: 0.8em;
+      padding: 0.3em 1em;
+      cursor: pointer;
+      &:hover {
+        color: #fff;
+        background-color: $base-color;
+        outline: 0 none;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+

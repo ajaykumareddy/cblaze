@@ -1,5 +1,6 @@
-.Register {
+@import "src/assets/styles/basecolor.scss";
 
+.Register {
     .register-title {
         display: inline;
         text-align: center;
@@ -18,20 +19,16 @@
         }
         .login{
             a {
-                color: #116ae7;
+                color: $base-color;
                 font-weight: 700;
                 &:active{
-                    color: #116ae7;
+                    color: $base-color;
                     font-weight: 700;
                 }
             }
-            
         }
     }
 }
-
-
-
 .form-controls {
     -webkit-text-size-adjust: 100%;
     font-family: Verdana,sans-serif;

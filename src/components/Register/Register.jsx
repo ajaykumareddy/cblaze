@@ -6,6 +6,8 @@ import {withTranslation} from "react-i18next";
 import Button from "../lib/Button/Button";
 import TextField from "../lib/TextField/TextField";
 import ENDPOINT from "../../config/endpoints";
+import SchoolService from "../../services/SchoolService";
+import AuthService from "../../services/AuthService";
 
 class Register extends React.Component {
 
@@ -15,53 +17,91 @@ class Register extends React.Component {
             schoolName: '',
             email: '',
             phone: '',
-            address:''
+            address:'',
+            error: {
+                schoolName: '',
+                email: '',
+                phone: '',
+                address: ''
+            }
         };
-
-        this.schoolEmail = React.createRef();
         this.phone = React.createRef();
         this.schoolAddress = React.createRef();
         this.registerClick = this.registerClick.bind(this);
         this.setSchoolName = this.setSchoolName.bind(this);
+        this.setEmail = this.setEmail.bind(this);
+        this.setPhone = this.setPhone.bind(this);
+        this.setAddress = this.setAddress.bind(this);
     }
 
     setSchoolName(schoolName) {
-        this.setState({ schoolName: schoolName }, () => {
-            console.log(this.state.schoolName);
+        this.setState((prevState) => {
+            return {
+                schoolName: schoolName,
+                error: {...prevState.error,schoolName: schoolName.length === 0 ? 'School Name cannot be empty' : ''}
+            }
         });
     }
 
-    validForm() {
-        let valid = true;
-        if(this.state.schoolName.length === 0) {
-            valid = false;
-        }
-        return valid;
+    setEmail(email) {
+        this.setState((prevState) => {
+            return {
+                email: email,
+                error: {...prevState.error,email: email.length === 0 ? 'Enter valid email' : ''}
+            }
+        });
+    }
+
+    setPhone(phone) {
+        this.setState((prevState) => {
+            return {
+                phone: phone,
+                error: {...prevState.error,phone: phone.length === 0 ? 'Enter Valid Phone Number' : ''}
+            }
+        });
+    }
+
+    setAddress(address) {
+        this.setState((prevState) => {
+            return {
+                address: address,
+                error: {...prevState.error,address: address.length === 0 ? 'Address cannot be empty' : ''}
+            }
+        });
     }
 
     registerClick() {
-        const { schoolName } = this.state;
+        const { schoolName,email,phone,address,error } = this.state;
         const { history} = this.props;
-        if(!this.validForm()) {
+
+        if(schoolName.length === 0 || email.length === 0 || phone.length === 0 || address.length === 0 ) {
+            window.alert('Errors in Form');
             return;
         }
-        axios.post(ENDPOINT.REGISTER, {
+
+        if(error.schoolName.length !== 0 || error.email.length !== 0 || error.phone.length !== 0 || error.address.length !== 0 ) {
+            window.alert('Errors in Form');
+            return;
+        }
+
+        SchoolService.registerSchool({
             name: schoolName,
-            email: this.schoolEmail.current.value,
-            phone: parseInt(this.phone.current.value),
-         //   schoolAddress: this.schoolAddress.current.value,
-            type: 1
+            email: email,
+            phone: phone,
+            address: address,
         }).then(function (response) {
             console.log(response);
-            window.sessionStorage.setItem('token' , response.data.token.access_token);
-            history.push('/verifyotp', {userId: response.data.user.id});
+            // AuthService.setAccessToken(response.data.access_token);
+            // window.sessionStorage.setItem('token' , response.data.token.access_token);
+            history.push('/verifyotp', {userId: response.data.id});
         }).catch(function (error) {
-            console.log(error);
+            window.alert("SomeThing went wrong");
         });
     }
 
     render() {
         const {t} = this.props;
+        const {error} = this.state;
         return (
             <div className="Register">
                 <div className="register-title">
@@ -69,44 +109,22 @@ class Register extends React.Component {
                 </div>
                 <div className="register-body">
                     <div>
-                        <TextField title={t('SCHOOL.NAME')} placeholder={t('SCHOOL.PLACEHOLDER.NAME')} autoFocus={true} inputHandler={this.setSchoolName} />
+                        <TextField title={t('SCHOOL.NAME')} type="text" placeholder={t('SCHOOL.PLACEHOLDER.NAME')} autoFocus={true} inputHandler={this.setSchoolName} value={this.state.schoolName} error={error.schoolName} />
                     </div>
-                    {/* <div className="form-controls">
-                    <label>School Name</label>
                     <div>
-                        <input type="text" placeholder="Enter Your School Name" ref={this.schoolName}/>
+                        <TextField title={t('EMAIL')} type="email" placeholder={t('PLACEHOLDER.EMAIL')} autoFocus={false} inputHandler={this.setEmail}  error={error.email} />
                     </div>
-                </div> */}
-                    <div className="form-controls">
-                        <label>{t('SCHOOL.EMAIL')}</label>
-                        <div>
-                            <input type="text" placeholder={t('SCHOOL.PLACEHOLDER.EMAIL')} ref={this.schoolEmail} />
-                        </div>
+                    <div>
+                        <TextField title={t('PHONE')} type="number" placeholder={t('PLACEHOLDER.PHONE')} autoFocus={false} inputHandler={this.setPhone}  error={error.phone} />
                     </div>
-                    <div className="form-controls">
-                        <label>{t('SCHOOL.PHONE')}</label>
-                        <div>
-                            <input type="text" placeholder={t('SCHOOL.PLACEHOLDER.PHONE')} ref={this.phone} />
-                        </div>
+                    <div>
+                        <TextField title={t('ADDRESS')} type="text" placeholder={t('PLACEHOLDER.ADDRESS')} autoFocus={false} inputHandler={this.setAddress}  error={error.address} />
                     </div>
-                    <div className="form-controls">
-                        <label>{t('SCHOOL.ADDRESS')}</label>
-                        <div>
-                            <input type="text" placeholder={t('SCHOOL.PLACEHOLDER.ADDRESS')} ref={this.schoolAddress} />
-                        </div>
+                    <div>
+                        <Button name={t('REGISTER')} clickHandler={this.registerClick} />
                     </div>
-                    {/*<Link to="/verifyotp">
-                        <div>
-                            <Button name="Register" clickHandler={this.registerClick} />
-                        </div>
-                    </Link>*/}
-
-                        <div>
-                            <Button name={t('REGISTER')} clickHandler={this.registerClick} />
-                        </div>
-
                     <div className="no-account">
-                        <span>{t('SCHOOL.EXISTING_ACCOUNT')}</span><span className="login"><Link to="/">{t('LOGIN')}</Link></span>
+                        <span>{t('SCHOOL.EXISTING_ACCOUNT')}</span><span className="login"><Link to="/login">{t('LOGIN')}</Link></span>
                     </div>
                 </div>
             </div>);

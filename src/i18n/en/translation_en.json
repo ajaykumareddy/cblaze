@@ -1,18 +1,26 @@
 {
   "REGISTER": "Register",
   "LOGIN": "Login",
+  "COUNTRY": "Country",
+  "STATE": "State",
+  "CITY": "City",
+  "PHONE": "Phone Number",
+  "EMAIL": "Email",
+  "ADDRESS": "Address",
   "SCHOOL" : {
     "REGISTER": "Register your School",
+    "CREATE_PROFILE": "Create your School Profile",
+    "DETAILS": "School Details",
     "NAME": "School Name",
-    "EMAIL": "Email",
-    "PHONE": "Phone Number",
-    "ADDRESS": "Address",
     "EXISTING_ACCOUNT": "Already have Account?",
     "PLACEHOLDER": {
-      "NAME":"Enter Your School Name",
-      "EMAIL": "Enter your Email",
-      "PHONE": "Enter Your Phone Number",
-      "ADDRESS": "Enter Your Address"
+      "NAME": "Enter Your School Name"
     }
+  },
+  "PLACEHOLDER": {
+    "COUNTRY": "Choose a Country Name",
+    "EMAIL": "Enter your Email",
+    "PHONE": "Enter Your Phone Number",
+    "ADDRESS": "Enter Your Address"
   }
 }

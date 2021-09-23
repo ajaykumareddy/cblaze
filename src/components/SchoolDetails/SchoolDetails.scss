@@ -1,0 +1,32 @@
+@import "src/assets/styles/basecolor.scss";
+
+.SchoolDetails {
+  box-shadow: 0 0 10px #c7c7c7;
+  margin: 25px;
+  .title-header {
+    display: flex;
+    justify-content: space-between;
+    .title {
+      font-size: 20px;
+      padding: 12px 25px;
+    }
+  }
+
+  .school-details-body {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 25px 25px;
+    div {
+      width: 30%;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      div {
+        width: 95%;
+        input {
+          width: 95%;
+          height: 34px;
+        }
+      }
+    }
+  }
+}

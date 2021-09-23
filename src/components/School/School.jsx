@@ -1,5 +1,5 @@
 import React from "react";
-
+import './School.scss';
 import educationImg from '../../assets/icons/education.svg';
 import schoolImg from '../../assets/icons/school.svg';
 import studentImg from '../../assets/icons/student.svg';
@@ -17,6 +17,7 @@ class School extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {};
     }
 
     render() {
@@ -35,27 +36,18 @@ class School extends React.Component {
 
                 </div>
                 <div className="section-C">
-
-                    <BrowserRouter basename="/school">
-                        <Switch>
-                            <Route exact path="/register">
+                            <Route path="/register">
                                 <Register />
                             </Route>
-                            <Route exact path="/verifyotp">
+                            <Route  path="/verifyotp">
                                 <OtpScreen />
                             </Route>
-                            <Route exact path="/setpassword">
+                            <Route  path="/setpassword">
                                 <Password />
                             </Route>
-                            <Route exact path="/">
-                                <Redirect to="/" />
+                            <Route  path="/login">
                                 <Login />
                             </Route>
-                            {/* <Route path="/error">
-                                <Redirect to="/" />
-                            </Route> */}
-                        </Switch>
-                    </BrowserRouter>
                 </div>
             </div>
 

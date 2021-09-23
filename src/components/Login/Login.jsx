@@ -1,9 +1,10 @@
 import React from "react";
 import './Login.scss';
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import axios from "axios";
 import Button from "../lib/Button/Button";
 import ENDPOINT from "../../config/endpoints";
+import AuthService from "../../services/AuthService";
 
 class Login extends React.Component {
 
@@ -15,14 +16,13 @@ class Login extends React.Component {
     }
 
     login() {
-        axios.post(ENDPOINT.LOGIN,{
-            email: this.email.current.value,
-            password: this.password.current.value}
-        ).then(function(response) {
-            window.sessionStorage.setItem('token' , response.data.token.access_token);
-          window.alert('Login Successful');
-        }).catch(function (error) {
-            console.log(error);
+        const { history } = this.props;
+        AuthService.login({email: this.email.current.value, password: this.password.current.value})
+            .then(function(response) {
+                AuthService.setAccessToken(response.data.access_token);
+                history.push('/school',{});
+            }).catch(function (error) {
+                console.log(error);
         });
     }
 
@@ -58,4 +58,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

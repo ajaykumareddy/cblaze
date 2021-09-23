@@ -1,0 +1,81 @@
+@import "src/assets/styles/basecolor.scss";
+
+.School {
+  height: 100vh;
+  background: url("../../assets/png/bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:600px;
+
+    .section-A{
+      display: flex;
+      flex-direction:column;
+      justify-content: center;
+      align-items: center;
+      background: #F5F9FF;
+      padding:20px 0;
+      height:85%;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .section-B{
+      background-color: $base-color;
+      width:500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height:100%;
+      flex-direction: column;
+      border-radius: 15px;
+
+      .welcome{
+        font-size: 38px;
+        font-weight: 500;
+        color:#fff;
+        padding-bottom: 20px;
+      }
+
+      .sub_head{
+        font-size: 20px;
+        font-weight:500;
+        color:#fff;
+      }
+    }
+
+    .section-C{
+      background-color: #F5F9FF;
+      height:85%;
+      padding:30px 30px 20px;
+      border-radius: 0 15px 15px 0;
+      width:46%;
+
+      .Register{
+
+        .register-title{
+          p{
+            font-size: 30px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: left;
+          }
+        }
+
+        .register-body{
+          padding: 0;
+        }
+      }
+    }
+  }
+
+
+}
+

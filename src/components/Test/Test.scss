@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+}
+@import "src/assets/styles/basecolor.scss";
+.Test {
+  .header {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 10px #c7c7c7;
+    .logo-box{
+      background-color: $base-color;
+      padding: 10px;
+      img {
+        width: 100px;
+        height: 60px;
+      }
+    }
+
+    .profile-box {
+      display: inline-flex;
+      align-items: center;
+      .profile-img img {
+        background: whitesmoke;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .profile-email {
+        padding: 0 50px 0 7px;
+      }
+    }
+
+
+  }
+  .main-section {
+    display: flex;
+    .sidebar {
+      background-color: $base-color;
+      height: calc(100vh - 84px);
+      width: 120px;
+      .sidebar-container {
+        display: flex;
+        height: 125px;
+        .active-box {
+          &.active {
+            width: 5px;
+            background-color: white;
+          }
+        }
+        img {
+          padding: 30px;
+          opacity: 0.5;
+        }
+        .active-box.active + img {
+          opacity: 0.9;
+          padding: 25px;
+        }
+      }
+    }
+    .working-container {
+      .working-container-title {
+        font-size: 25px;
+        padding: 25px 0 0 25px;
+      }
+      flex: 1;
+      .registration-area {
+        box-shadow: 0 0 10px #c7c7c7;
+        margin: 25px;
+
+        .area-1 {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 0 25px 25px;
+
+          div {
+            width: 30%;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            div {
+              width: 95%;
+              input {
+                width: 95%;
+                height: 34px;
+              }
+            }
+          }
+        }
+      }
+      .standard-details {
+        box-shadow: 0 0 10px #c7c7c7;
+        margin: 25px;
+        .title {
+          font-size: 15px;
+        }
+        .add-standard {
+          border: 1px solid $base-color;
+          color: $base-color;
+          font-weight: 700;
+          margin: 10px 40px 10px 10px;
+          padding: 15px 15px 10px;
+          background-color: white;
+
+        }
+      }
+
+      .save-button-area {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 25px;
+        .Button {
+          margin: 0;
+        }
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        .title {
+          font-size: 20px;
+          padding: 12px 25px;
+        }
+      }
+      .area-1 {
+        padding: 0 25px 25px;
+        table {
+          width: 100%;
+          thead {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+
+}

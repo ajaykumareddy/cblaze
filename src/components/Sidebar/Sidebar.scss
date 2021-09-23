@@ -1,0 +1,25 @@
+@import "src/assets/styles/basecolor.scss";
+
+.Sidebar {
+  background-color: $base-color;
+  height: calc(100vh - 84px);
+  width: 120px;
+  .sidebar-container {
+    display: flex;
+    height: 125px;
+    .active-box {
+      &.active {
+        width: 5px;
+        background-color: white;
+      }
+    }
+    img {
+      padding: 30px;
+      opacity: 0.5;
+    }
+    .active-box.active + img {
+      opacity: 0.9;
+      padding: 25px;
+    }
+  }
+}

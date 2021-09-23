@@ -9,7 +9,7 @@ import  './config/i18n.js';
 ReactDOM.render(
   <React.StrictMode>
       <Suspense fallback={(<div>Loading...</div>)} >
-          <App />
+         <App />
       </Suspense>
   </React.StrictMode>,
   document.getElementById('root')

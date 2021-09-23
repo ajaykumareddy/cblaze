@@ -14,17 +14,20 @@ class TextField extends React.Component {
     }
 
     render() {
-        const { title, placeholder, autoFocus, inputHandler } = this.props;
+        const { title, type, placeholder, autoFocus, inputHandler,value,error } = this.props;
         return (<div className="TextField">
-            <label className="text-title">{title}</label>
+            <label className={`text-title`}>{title}</label>
             <div className="text-field-input">
-                <input className="input-text"
-                       type="text"
+                <input className={`input-text ${error ? 'error' : ''}`}
+                       autoComplete="f**k"
+                       type={type}
                        placeholder={placeholder}
                        autoFocus={autoFocus} 
                        ref={this.value} 
-                       onInput={() => { inputHandler(this.value.current.value) }} 
+                       onInput={() => { inputHandler(this.value.current.value) }}
+                       value={value}
                 />
+                {error && <span className="error"> {error}</span>}
             </div>
         </div>)
     }
