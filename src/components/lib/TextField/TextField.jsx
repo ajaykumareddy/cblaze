@@ -14,7 +14,7 @@ class TextField extends React.Component {
     }
 
     render() {
-        const { title, type, placeholder, autoFocus, inputHandler,value,error } = this.props;
+        const { title, type, placeholder, autoFocus, inputHandler,value,error,disabled} = this.props;
         return (<div className="TextField">
             <label className={`text-title`}>{title}</label>
             <div className="text-field-input">
@@ -26,6 +26,7 @@ class TextField extends React.Component {
                        ref={this.value} 
                        onInput={() => { inputHandler(this.value.current.value) }}
                        value={value}
+                       disabled={disabled}
                 />
                 {error && <span className="error"> {error}</span>}
             </div>

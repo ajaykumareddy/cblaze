@@ -1,23 +1,25 @@
 import React from "react";
+import { Route} from "react-router-dom";
 import './School.scss';
-import educationImg from '../../assets/icons/education.svg';
-import schoolImg from '../../assets/icons/school.svg';
-import studentImg from '../../assets/icons/student.svg';
-import teacherImg from '../../assets/icons/teach.svg';
 import LoginSidebarImage from '../../components/LoginSidebarImage/LoginSidebarImage';
 import Register from '../../components/Register/Register';
-import { Switch, Route, Link, BrowserRouter,Redirect } from "react-router-dom";
 import Login from '../../components/Login/Login';
 import OtpScreen from '../../components/OtpScreen/OtpScreen';
 import Password from '../../components/Password/Password';
 import logo from '../../assets/svg/logo.svg';
+import educationImg from '../../assets/icons/education.svg';
+import schoolImg from '../../assets/icons/school.svg';
+import studentImg from '../../assets/icons/student.svg';
+import teacherImg from '../../assets/icons/teach.svg';
 
 
 class School extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+
+        };
     }
 
     render() {
@@ -36,18 +38,18 @@ class School extends React.Component {
 
                 </div>
                 <div className="section-C">
-                            <Route path="/register">
-                                <Register />
-                            </Route>
-                            <Route  path="/verifyotp">
-                                <OtpScreen />
-                            </Route>
-                            <Route  path="/setpassword">
-                                <Password />
-                            </Route>
-                            <Route  path="/login">
-                                <Login />
-                            </Route>
+                    <Route path="/register">
+                        <Register />
+                    </Route>
+                    <Route  path="/verifyotp">
+                        <OtpScreen />
+                    </Route>
+                    <Route  path="/setpassword">
+                        <Password />
+                    </Route>
+                    <Route  path="/login">
+                        <Login />
+                    </Route>
                 </div>
             </div>
 

@@ -3,6 +3,8 @@ import './SchoolDetails.scss';
 import {withTranslation} from "react-i18next";
 import TextField from "../lib/TextField/TextField";
 import SelectField from "../lib/SelectField/SelectField";
+import SchoolService from "../../services/SchoolService";
+import Button from "../lib/Button/Button";
 
 class SchoolDetails extends React.Component {
 
@@ -20,26 +22,70 @@ class SchoolDetails extends React.Component {
         }
         this.setCountry = this.setCountry.bind(this);
         this.setSchoolName = this.setSchoolName.bind(this);
+        this.setStateName = this.setStateName.bind(this);
+        this.setCity = this.setCity.bind(this);
+        this.setPhone = this.setPhone.bind(this);
+        this.setEmail = this.setEmail.bind(this);
+        this.setAddress = this.setAddress.bind(this);
+        this.updateSchoolDetails = this.updateSchoolDetails.bind(this);
+    }
+
+    componentDidMount() {
+        var self = this;
+        SchoolService.getSchoolDetails(window.localStorage.getItem('schoolId')).then(function (response) {
+            let data = response.data;
+            self.setState({name: data.name,country: data.country,state: data.state,city: data.city,phone: data.phone,email: data.email,address: data.address});
+        });
     }
 
     setCountry(country) {
-        this.setState({country});
+        this.setState({country: country});
     }
 
     setSchoolName(name) {
-        this.setState({name});
+        this.setState({name: name});
     }
+
+    setStateName(state) {
+        this.setState({state: state});
+    }
+
+    setCity(city) {
+        this.setState({city: city});
+    }
+
+    setPhone(phone) {
+        this.setState({phone: phone});
+    }
+
+    setEmail(email) {
+        this.setState({email: email});
+    }
+
+    setAddress(address) {
+        this.setState({address: address});
+    }
+
+
+    updateSchoolDetails() {
+
+        SchoolService.updateSchoolDetails(this.state).then(function (response) {
+
+        }).catch(function (error) {
+
+        });
+    }
+
 
     render() {
         const {t} = this.props;
         const {name,country,city,state,address,phone,email} = this.state;
         return <div className="SchoolDetails">
+            <div className="title-header">
+                <div className="title">{t('SCHOOL.DETAILS')}</div>
+                <div className="school-helptext">Info about School</div>
+            </div>
             <div className="school-details">
-                <div className="title-header">
-                    <div className="title">{t('SCHOOL.DETAILS')}</div>
-                    <div className="school-helptext">Info about School</div>
-                </div>
-
                 <div className="school-details-body">
                     <div>
                         <TextField title={t('SCHOOL.NAME')} placeholder={t('SCHOOL.PLACEHOLDER.NAME')} autoFocus={true} inputHandler={this.setSchoolName} value={name} />
@@ -48,22 +94,38 @@ class SchoolDetails extends React.Component {
                         <SelectField title={t('COUNTRY')} list="country" placeholder={t('PLACEHOLDER.COUNTRY')} inputHandler={this.setCountry} value={country} options={['India']} />
                     </div>
                     <div>
-                        <SelectField title={t('STATE')} list="state" placeholder={t('PLACEHOLDER.STATE')} inputHandler={this.setCountry} value={state} options={['Tamil Nadu']} />
+                        <SelectField title={t('STATE')} list="state" placeholder={t('PLACEHOLDER.STATE')} inputHandler={this.setStateName} value={state} options={['Tamil Nadu']} />
                     </div>
                     <div>
-                        <SelectField title={t('CITY')} list="city" placeholder={t('PLACEHOLDER.CITY')} inputHandler={this.setCountry} value={city} options={['Chennai']} />
+                        <SelectField title={t('CITY')} list="city" placeholder={t('PLACEHOLDER.CITY')} inputHandler={this.setCity} value={city} options={['Chennai']} />
                     </div>
 
                     <div>
-                        <TextField title={t('PHONR')} placeholder={t('PLACEHOLDER.PHONE')} autoFocus={true} inputHandler={this.setSchoolName} value={phone} />
+                        <TextField title={t('PHONE')} type="number" placeholder={t('PLACEHOLDER.PHONE')} autoFocus={true} inputHandler={this.setPhone} value={phone} />
                     </div>
                     <div>
-                        <TextField title={t('EMAIL')} placeholder={t('PLACEHOLDER.EMAIL')} autoFocus={true} inputHandler={this.setSchoolName} value={email} />
+                        <TextField title={t('EMAIL')} placeholder={t('PLACEHOLDER.EMAIL')} autoFocus={true} inputHandler={this.setEmail} value={email} disabled={true}/>
                     </div>
                     <div>
-                        <TextField title={t('ADDRESS')} placeholder={t('PLACEHOLDER.ADDRESS')} autoFocus={true} inputHandler={this.setSchoolName} value={address} />
+                        <TextField title={t('ADDRESS')} placeholder={t('PLACEHOLDER.ADDRESS')} autoFocus={true} inputHandler={this.setAddress} value={address} />
                     </div>
                 </div>
+                <div className="school-logo-box">
+
+                        <label htmlFor="logo" className="btn">Select Image</label>
+                        <input accept="image/png" type="file" id="logo" className="logo-default-button" onChange={() => {
+                                const [file] = document.querySelector('#logo').files
+                                if (file) {
+                                    document.querySelector('#schoolLogo').src = URL.createObjectURL(file)
+                                }
+                            }
+                        } />
+                        <img width="220" height="220" id="schoolLogo"  src="#" alt="school image" />
+
+                </div>
+            </div>
+            <div className="school-details-save">
+                <Button name="Save"  clickHandler={this.updateSchoolDetails}/>
             </div>
         </div>
     }

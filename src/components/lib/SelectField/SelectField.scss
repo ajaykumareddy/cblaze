@@ -2,7 +2,15 @@
 
 .SelectField {
   input {
-    outline: none;
+    margin: 0;
+    font-size: 15px;
+    padding: 10px;
+    display: block;
+    border: 1px solid #CBDFFB;
+    border-radius: 3px;
+    margin-top: 10px;
+    width: 95%;
+    height: 34px;
   }
   datalist {
     position: absolute;

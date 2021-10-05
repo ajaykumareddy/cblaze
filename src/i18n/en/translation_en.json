@@ -7,6 +7,7 @@
   "PHONE": "Phone Number",
   "EMAIL": "Email",
   "ADDRESS": "Address",
+  "PASSWORD": "Password",
   "SCHOOL" : {
     "REGISTER": "Register your School",
     "CREATE_PROFILE": "Create your School Profile",
@@ -21,6 +22,9 @@
     "COUNTRY": "Choose a Country Name",
     "EMAIL": "Enter your Email",
     "PHONE": "Enter Your Phone Number",
-    "ADDRESS": "Enter Your Address"
+    "ADDRESS": "Enter Your Address",
+    "PASSWORD": "Enter Your Password",
+    "STATE": "Choose a State Name",
+    "CITY": "Choose a City Name"
   }
 }

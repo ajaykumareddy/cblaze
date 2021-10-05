@@ -1,55 +1,71 @@
 import React from "react";
 import './Login.scss';
 import {Link, withRouter} from 'react-router-dom';
-import axios from "axios";
+import {withTranslation} from "react-i18next";
 import Button from "../lib/Button/Button";
-import ENDPOINT from "../../config/endpoints";
 import AuthService from "../../services/AuthService";
+import TextField from "../lib/TextField/TextField";
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.email = React.createRef();
-        this.password = React.createRef();
+        this.state = {
+            email: '',
+            password: '',
+            error: ''
+        };
         this.login = this.login.bind(this);
+        this.setEmail = this.setEmail.bind(this);
+        this.setPassword = this.setPassword.bind(this);
     }
 
+    setEmail(email) {
+        this.setState({email: email});
+    }
+
+    setPassword(password) {
+        this.setState({password: password});
+    }
+
+
     login() {
+        var self = this;
         const { history } = this.props;
-        AuthService.login({email: this.email.current.value, password: this.password.current.value})
+        const { email,password } = this.state;
+        AuthService.login({email: email, password: password})
             .then(function(response) {
                 AuthService.setAccessToken(response.data.access_token);
+                window.localStorage.setItem('userId',response.data.user.id);
+                window.localStorage.setItem('schoolId',response.data.user.school_id);
                 history.push('/school',{});
             }).catch(function (error) {
-                console.log(error);
+            self.setState({error: "Invalid Credentials"});
         });
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div className="Login">
+                <div className="error-box">
+                    <span>{this.state.error}</span>
+                </div>
                 <div className="login-title">
                     <p>Login for School</p>
                 </div>
                 <div className="login-body">
+
                     <div className="form-controls">
-                        <label>Email</label>
-                        <div>
-                            <input type="text" placeholder="Enter your Email" autoFocus ref={this.email} />
-                        </div>
+                        <TextField title={t('EMAIL')} type="email" placeholder={t('PLACEHOLDER.EMAIL')} autoFocus={true} inputHandler={this.setEmail} />
                     </div>
                     <div className="form-controls">
-                        <label>Password</label>
-                        <div>
-                            <input type="password" placeholder="Enter Your Password"  ref={this.password} />
-                        </div>
+                        <TextField title={t('PASSWORD')} type="empasswordail" placeholder={t('PLACEHOLDER.PASSWORD')} autoFocus={false} inputHandler={this.setPassword} />
                     </div>
-                    <Link to="/">
-                        <div>
-                            <Button name="Login" clickHandler={this.login} />
-                        </div>
-                    </Link>
+
+                    <div>
+                        <Button name="Login" clickHandler={this.login} />
+                    </div>
                     <div className="has-account">
                         <span>Don't have Account?</span><span className="register"><Link to="/register">Register</Link></span>
                     </div>
@@ -58,4 +74,4 @@ class Login extends React.Component {
     }
 }
 
-export default withRouter(Login);
+export default withTranslation()(withRouter(Login));

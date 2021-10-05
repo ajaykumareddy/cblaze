@@ -1,4 +1,11 @@
+@import "src/assets/styles/basecolor.scss";
+
 .Login {
+    .error-box {
+        margin: 0 auto;
+        text-align: center;
+        color: $error-color;
+    }
 
     .login-title {
         display: inline;
@@ -18,10 +25,10 @@
         }
         .register{
             a {
-                color: #116ae7;
+                color: $base-color;
                 font-weight: 700;
                 &:active{
-                    color: #116ae7;
+                    color: $base-color;
                     font-weight: 700;
                 }
             }

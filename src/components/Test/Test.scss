@@ -1,137 +1,175 @@
-* {
+*, :after, :before{
+  padding:0;
+  margin:0;
   box-sizing: border-box;
 }
-@import "src/assets/styles/basecolor.scss";
-.Test {
-  .header {
-    display: flex;
-    flex-wrap: nowrap;
+
+:root {
+  --theme:#116AE7;
+}
+
+.mainContainer{
+  padding:20px;
+  background-color: #F5F7FB;
+  height:100vh;
+  overflow: scroll;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h3{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.header button{
+  padding:7px 27px;
+  border:1px solid var(--theme);
+  border-radius: 3px;
+  font-size: 13px;
+  background-color: transparent;
+  color:var(--theme);
+}
+
+.form-card{
+  padding: 20px 15px 15px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.13);
+  border-radius: 3px;
+  margin:20px 0;
+}
+
+.form-card h4{
+  font-size: 14px;
+  margin: 0 0 15px 10px;
+}
+
+.form-card .inputFields{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.form-card .inputFields .detailCheckCont{
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  margin:0px 10px 20px;
+  width: 190px;
+}
+
+.form-card .inputFields .detailCheckCont input{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  opacity: 0;
+  z-index: 2;
+}
+.form-card .inputFields .detailCheckCont input:checked + .detailCheck{
+  background-color: var(--theme);
+  border:1px solid var(--theme);
+}
+
+.form-card .inputFields .detailCheckCont input:checked + .detailCheck p{
+  color:#fff;
+}
+
+.form-card .inputFields .detailCheckCont .detailCheck{
+  text-align: center;
+  width:100%;
+  height:100%;
+  padding:7px 15px;
+  border: 1px solid rgba(43, 45, 66, 0.4);
+  border-radius: 3px;
+  position: relative;
+}
+
+.form-card .inputFields .detailCheckCont .detailCheck:after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+ // background-image: url(vector.svg);
+  width: 15px;
+  height: 15px;
+  background-size: 13px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.form-card .inputFields .detailCheckCont .detailCheck p{
+  color:#AAABB3;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btns{
+  text-align: right;
+  padding:15px 0;
+}
+
+.btns .btnOutline, .btns .btnFill{
+  border:1px solid var(--theme);
+  box-shadow:0px 5px 6px rgba(17, 106, 231, 0.16);
+  border-radius: 3px;
+  padding:7px 55px;
+  font-size: 18px;
+  font-weight: 500;
+  color:var(--theme);
+  transition: all ease 0.4s;
+}
+
+.btns .btnFill, .btns .btnOutline:hover, .header button:hover{
+  background-color: var(--theme);
+  color: #fff;
+}
+
+@media(min-width:1400){
+  .form-card .inputFields .detailCheckCont{
+    width:15%;
+  }
+}
+@media(max-width:1200px){
+  .form-card .inputFields .detailCheckCont{
+    width:22%;
+  }
+  .form-card .inputFields .detailCheckCont .detailCheck:after{
+    background-size: 10px;
+  }
+}
+@media(max-width:768px){
+  .form-card .inputFields .detailCheckCont{
+    width:29%;
+  }
+  .form-card .inputFields .detailCheckCont .detailCheck:after{
+    left:2px;
+  }
+}
+@media(max-width:576px){
+  .header{
+    flex-wrap: wrap;
+  }
+  .headerBtn{
+    margin-top:20px;
+  }
+  .form-card .inputFields{
     justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 0 10px #c7c7c7;
-    .logo-box{
-      background-color: $base-color;
-      padding: 10px;
-      img {
-        width: 100px;
-        height: 60px;
-      }
-    }
-
-    .profile-box {
-      display: inline-flex;
-      align-items: center;
-      .profile-img img {
-        background: whitesmoke;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-      }
-      .profile-email {
-        padding: 0 50px 0 7px;
-      }
-    }
-
-
   }
-  .main-section {
-    display: flex;
-    .sidebar {
-      background-color: $base-color;
-      height: calc(100vh - 84px);
-      width: 120px;
-      .sidebar-container {
-        display: flex;
-        height: 125px;
-        .active-box {
-          &.active {
-            width: 5px;
-            background-color: white;
-          }
-        }
-        img {
-          padding: 30px;
-          opacity: 0.5;
-        }
-        .active-box.active + img {
-          opacity: 0.9;
-          padding: 25px;
-        }
-      }
-    }
-    .working-container {
-      .working-container-title {
-        font-size: 25px;
-        padding: 25px 0 0 25px;
-      }
-      flex: 1;
-      .registration-area {
-        box-shadow: 0 0 10px #c7c7c7;
-        margin: 25px;
-
-        .area-1 {
-          display: flex;
-          flex-wrap: wrap;
-          padding: 0 25px 25px;
-
-          div {
-            width: 30%;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            div {
-              width: 95%;
-              input {
-                width: 95%;
-                height: 34px;
-              }
-            }
-          }
-        }
-      }
-      .standard-details {
-        box-shadow: 0 0 10px #c7c7c7;
-        margin: 25px;
-        .title {
-          font-size: 15px;
-        }
-        .add-standard {
-          border: 1px solid $base-color;
-          color: $base-color;
-          font-weight: 700;
-          margin: 10px 40px 10px 10px;
-          padding: 15px 15px 10px;
-          background-color: white;
-
-        }
-      }
-
-      .save-button-area {
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 25px;
-        .Button {
-          margin: 0;
-        }
-      }
-
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        .title {
-          font-size: 20px;
-          padding: 12px 25px;
-        }
-      }
-      .area-1 {
-        padding: 0 25px 25px;
-        table {
-          width: 100%;
-          thead {
-            text-align: left;
-          }
-        }
-      }
-    }
+  .form-card .inputFields .detailCheckCont{
+    width:42%;
   }
-
+  .btns{
+    text-align: center;
+  }
+  .btns .btnOutline, .btns .btnFill{
+    padding:7px 35px;
+    font-size: 14px;
+  }
 }

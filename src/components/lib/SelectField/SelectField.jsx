@@ -18,7 +18,8 @@ class SelectField extends React.Component {
             <div>
                 <input autoComplete='f**k'
                     ref={this.value}
-                    list={list} value={value}
+                    list={list}
+                    value={value}
                     placeholder={placeholder}
                     onInput={() => inputHandler(this.value.current.value)} />
             </div>

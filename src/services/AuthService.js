@@ -1,7 +1,6 @@
 import axios from "axios";
 import ENDPOINT from "../config/endpoints";
 
-
 const AuthService = {
     isLoggedIn : false,
     login: function (data) {
@@ -12,7 +11,7 @@ const AuthService = {
         window.localStorage.setItem('token',token);
     },
     updateAccessToken:function (token) {
-        axios.post(ENDPOINT.REGISTER,{}).then(function (token) {
+        axios.post(ENDPOINT.REGISTER_SCHOOL,{}).then(function (token) {
             window.localStorage.setItem('token',token);
         })
     },

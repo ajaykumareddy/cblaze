@@ -1,13 +1,10 @@
 import React from "react";
 import './register.scss'
-import axios from "axios";
 import { Link, withRouter} from "react-router-dom";
 import {withTranslation} from "react-i18next";
 import Button from "../lib/Button/Button";
 import TextField from "../lib/TextField/TextField";
-import ENDPOINT from "../../config/endpoints";
 import SchoolService from "../../services/SchoolService";
-import AuthService from "../../services/AuthService";
 
 class Register extends React.Component {
 
@@ -44,10 +41,12 @@ class Register extends React.Component {
     }
 
     setEmail(email) {
+        const REGEX_EMAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
         this.setState((prevState) => {
             return {
                 email: email,
-                error: {...prevState.error,email: email.length === 0 ? 'Enter valid email' : ''}
+                error: {...prevState.error,email: !REGEX_EMAIL.test(email.toLowerCase()) ? 'Enter valid email' : ''}
             }
         });
     }
@@ -56,7 +55,7 @@ class Register extends React.Component {
         this.setState((prevState) => {
             return {
                 phone: phone,
-                error: {...prevState.error,phone: phone.length === 0 ? 'Enter Valid Phone Number' : ''}
+                error: {...prevState.error,phone: phone.length !== 10 ? 'Enter Valid Phone Number' : ''}
             }
         });
     }
@@ -90,7 +89,6 @@ class Register extends React.Component {
             phone: phone,
             address: address,
         }).then(function (response) {
-            console.log(response);
             // AuthService.setAccessToken(response.data.access_token);
             // window.sessionStorage.setItem('token' , response.data.token.access_token);
             history.push('/verifyotp', {userId: response.data.id});

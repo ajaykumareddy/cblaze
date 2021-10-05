@@ -53,7 +53,6 @@ input {
 }
 
 #root {
-  /*background: url('assets/png/bg.png');*/
   height: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -83,24 +82,3 @@ a {
 a:active {
   text-decoration: none;
 }
-
-.warning {
-  color: red;
-}
-/* Close Cross */
-
-.close-cross {
-  display: inline-block;
-  position: absolute;
-  right: 10px;
-  top: 5px;
-}
-
-.close-cross:after {
-  content: '\d7';
-  font-size: 30px;
-  color: grey;
-  line-height: 20px;
-}
-
-/* Close Cross */

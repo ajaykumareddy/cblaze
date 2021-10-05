@@ -12,21 +12,65 @@
     }
   }
 
-  .school-details-body {
+  .school-details{
     display: flex;
-    flex-wrap: wrap;
-    padding: 0 25px 25px;
-    div {
-      width: 30%;
-      margin-bottom: 10px;
-      margin-top: 10px;
+    .school-details-body {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 25px 25px;
+      width: 85%;
       div {
-        width: 95%;
-        input {
+        width: 30%;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        div {
           width: 95%;
-          height: 34px;
+          input {
+            width: 95%;
+            height: 34px;
+          }
         }
       }
     }
+  }
+
+}
+
+.logo-default-button {
+   visibility: hidden;
+}
+.school-logo-box{
+  width:220px;
+  height:220px;
+  border-radius: 50%;
+  background-color: rgba(164, 176, 190, 0.2);
+  border:5px solid #fff;
+  box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.09);
+  position: relative;
+  overflow: hidden;
+  margin:30px 35px 0 0;
+
+
+  .btn{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    border-radius: 50%;
+    top:0;
+    left:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  input{
+    position: absolute;
+    width:100%;
+    height:100%;
+  }
+  #schoolLogo{
+    position: relative;
+    z-index: 2;
+    height:220px;
+    width:auto;
   }
 }

@@ -9,8 +9,7 @@
     height: 125px;
     .active-box {
       &.active {
-        width: 5px;
-        background-color: white;
+
       }
     }
     img {
@@ -22,4 +21,10 @@
       padding: 25px;
     }
   }
+}
+
+.selected > .sidebar-container > .active {
+  width: 5px;
+  background-color: white;
+  opacity: 0.9;
 }
