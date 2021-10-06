@@ -9,6 +9,7 @@ import SchoolDetails from "../SchoolDetails/SchoolDetails";
 import {Route, Switch} from "react-router-dom";
 import Standard from "../Standard/Standard";
 import Test from "../Test/Test";
+import StaffDetails from "../StaffDetails/StaffDetails";
 
 
 class SchoolHome extends React.Component {
@@ -34,8 +35,6 @@ class SchoolHome extends React.Component {
                                     <SchoolDetails />
                                 </Route>
                                     <Route exact path="/school/standards">
-
-
                                     <Standard />
                                     <div className="save-button-area">
                                         <Button name="Save" />
@@ -45,6 +44,9 @@ class SchoolHome extends React.Component {
                                     <Test />
                                 </Route>
                                 <Route exact path="/school/staff">
+                                    <StaffDetails />
+                                </Route>
+                                <Route exact path="/school/addStaff">
 
                                 </Route>
                                 </Switch>
