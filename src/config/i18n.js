@@ -18,7 +18,7 @@ i18n
     .use(initReactI18next)
     .init({
         resources: resources,
-        lng: "en", // choose the language here
+        lng: window && window.localStorage.getItem('settings') ?  JSON.parse(window.localStorage.getItem('settings')).lang : 'en', // choose the language here
         fallbackLng: 'en',
         debug: true,
         interpolation: {

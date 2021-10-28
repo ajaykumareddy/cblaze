@@ -1,22 +1,40 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import i18n from "i18next";
 import './Settings.scss';
 
 
 function Settings(props) {
 
+    useEffect(() => {
+        if(window && window.localStorage && window.localStorage.getItem('settings') && window.localStorage.getItem('settings')) {
+            document.documentElement.style.setProperty('--theme', JSON.parse(window.localStorage.getItem('settings')).theme);
+        }else {
+            window.localStorage && window.localStorage.setItem('settings',JSON.stringify({}));
+        }
+    });
+
 
     function changeLanguage(e) {
-        i18n.changeLanguage(e.target.options[e.target.options.selectedIndex].value);
+        i18n.changeLanguage(e.target.options[e.target.options.selectedIndex].value).then(r => {
+            let settingsJson = window.localStorage.getItem('settings');
+            let settings = JSON.parse(settingsJson);
+            settings['lang'] =  e.target.options[e.target.options.selectedIndex].value;
+            window.localStorage.setItem('settings', JSON.stringify(settings));
+        });
+
     }
 
     function changeTheme(e) {
-        document.documentElement.style.setProperty('--theme',e.target.options[e.target.options.selectedIndex].value)
-
+        document.documentElement.style.setProperty('--theme',e.target.options[e.target.options.selectedIndex].value);
+        let settingsJson = window.localStorage.getItem('settings');
+        let settings = JSON.parse(settingsJson);
+        settings['theme'] =  e.target.options[e.target.options.selectedIndex].value;
+        window.localStorage.setItem('settings', JSON.stringify(settings));
     }
 
     const [options, addOptions] = useState([{ name: 'EN' ,value:"en" }, { name: 'TA' ,value:"ta" }]);
-    const [themes, addTheme] = useState([{ name: 'BLUE' ,value:"#116AE7" }, { name: 'RED' ,value:"#E71B2A" } ,{ name: 'GREEN' ,value:"#00703C" },{ name: 'BLACK' ,value:"#0E1013" },{ name: 'YELLOW' ,value:"#E9CD29" } ]);
+    const [themes, addTheme] = useState([{ name: 'BLUE' ,value:"#116AE7" }, { name: 'RED' ,value:"#E71B2A" } ,{ name: 'GREEN' ,value:"#00703C" },{ name: 'BLACK' ,value:"#0E1013" },
+        { name: 'YELLOW' ,value:"#ee9819" } ]);
 
     return (<div className="Settings">
         <select name="lang" onChange={changeLanguage}>

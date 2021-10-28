@@ -2,18 +2,36 @@ import React from "react";
 
 class Staff extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
     render() {
+        const {data} = this.props;
         return <>
-            <tr>
-                <td>1</td>
-                <td>00123</td>
-                <td>Abhi</td>
-                <td>Male</td>
-                <td>Staff</td>
-                <td>9874561230</td>
-                <td>Active</td>
-                <td> v e p d </td>
-            </tr>
+            {data.map((staff,index) => {
+                return <tr>
+                    <td>{ index + 1 }</td>
+                    <td>00123</td>
+                    <td>{staff}</td>
+                    <td>Male</td>
+                    <td>Staff</td>
+                    <td>9874561230</td>
+                    <td>Active</td>
+                    <td>Staff</td>
+                    <td>9874561230</td>
+                    <td>Active</td>
+                    <td>Staff</td>
+                    <td>9874561230</td>
+                    <td>Active</td>
+                    <td>Staff</td>
+                    <td>9874561230</td>
+                    <td>Active</td>
+
+                    <td> v e p d </td>
+                </tr>
+            })}
         </>
     }
 }

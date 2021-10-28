@@ -4,33 +4,51 @@ import './StaffDetails.scss';
 import Button from "../lib/Button/Button";
 import TextField from "../lib/TextField/TextField";
 import Staff from "./Staff";
+import NoData from "../NoData/NoData";
 
 class StaffDetails extends React.Component {
+    constructor(props) {
+        super(props);
 
-    constructor() {
-        super();
-        this.state = {};
+        this.data = ["Ajay","Bhanu","Chandu","Eshwar","Franklin","Gowsalya","Hema","Illayaraja","Jeswanth","Keerthi","Lavanya","Manisha","Nitish","Omkar","Prasanth","Quincy","Rakesh","Sri Ram"];
+        this.state = {
+            list: this.data
+        };
 
         this.createStaff = this.createStaff.bind(this);
+        this.searchStaff = this.searchStaff.bind(this);
     }
 
 
     createStaff() {
         const { history} = this.props;
-        history.push('/school/addStaff')
+        history.push('/school/addStaff');
+    }
+
+    searchStaff(searchTxt) {
+        let s = this.data.filter( (d) => {
+            return d.toLowerCase().includes(searchTxt.toLowerCase());
+        });
+        this.setState({list: s});
     }
 
     render() {
+        let {list} = this.state;
         return <div className="StaffDetails">
                     <div className="staff-header">
                         <div className="staff-header-title">
                             <h3>Staff Details</h3>
                         </div>
                         <div className="staff-header-options">
-                            <div className="search-box"> <TextField placeholder="Search Staff"/></div>
-                            <div className="no-color" >
-                                <Button name="Basic Reports" />
-                            </div>
+                            { list && list.length > 0 &&
+                            <React.Fragment>
+                               <div className="search-box"> <TextField type="search" placeholder="Search Staff" inputHandler={this.searchStaff}/></div>
+                               <div className="no-color" >
+                                   <Button name="Basic Reports" />
+                               </div>
+                            </React.Fragment>
+                            }
+
                             <div className="green">
                                 <Button name="Download/Import" />
                             </div>
@@ -40,6 +58,8 @@ class StaffDetails extends React.Component {
                         </div>
                     </div>
                     <div className="staff-body">
+                        {list && list.length === 0 && <NoData />}
+
                         <div className="staff-category">
                             <span>Non Tech Staff</span>
                             <span className="active">Technical Staff</span>
@@ -55,11 +75,20 @@ class StaffDetails extends React.Component {
                                     <th>Designation</th>
                                     <th>Phone Number</th>
                                     <th>Status</th>
+                                    <th>Designation</th>
+                                    <th>Phone Number</th>
+                                    <th>Status</th>
+                                    <th>Designation</th>
+                                    <th>Phone Number</th>
+                                    <th>Status</th>
+                                    <th>Designation</th>
+                                    <th>Phone Number</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <Staff />
+                                    <Staff data={this.state.list}/>
                                 </tbody>
                             </table>
 
