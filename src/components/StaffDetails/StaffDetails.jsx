@@ -5,6 +5,7 @@ import Button from "../lib/Button/Button";
 import TextField from "../lib/TextField/TextField";
 import Staff from "./Staff";
 import NoData from "../NoData/NoData";
+import Test from "../Test/Test";
 
 class StaffDetails extends React.Component {
     constructor(props) {
@@ -12,8 +13,10 @@ class StaffDetails extends React.Component {
 
         this.data = ["Ajay","Bhanu","Chandu","Eshwar","Franklin","Gowsalya","Hema","Illayaraja","Jeswanth","Keerthi","Lavanya","Manisha","Nitish","Omkar","Prasanth","Quincy","Rakesh","Sri Ram"];
         this.state = {
-            list: this.data
+            list: this.data,
+            isNew: false
         };
+
 
         this.createStaff = this.createStaff.bind(this);
         this.searchStaff = this.searchStaff.bind(this);
@@ -33,8 +36,13 @@ class StaffDetails extends React.Component {
     }
 
     render() {
-        let {list} = this.state;
+        let {list,isNew} = this.state;
         return <div className="StaffDetails">
+            {isNew && <React.Fragment >
+                <Test />
+
+            </React.Fragment> }
+            { !isNew && <React.Fragment>
                     <div className="staff-header">
                         <div className="staff-header-title">
                             <h3>Staff Details</h3>
@@ -59,6 +67,8 @@ class StaffDetails extends React.Component {
                     </div>
                     <div className="staff-body">
                         {list && list.length === 0 && <NoData />}
+
+                        { list && list.length !== 0 && <>
 
                         <div className="staff-category">
                             <span>Non Tech Staff</span>
@@ -93,8 +103,9 @@ class StaffDetails extends React.Component {
                             </table>
 
                         </div>
+                        </>}
                     </div>
-
+            </React.Fragment> }
             </div>
     }
 }

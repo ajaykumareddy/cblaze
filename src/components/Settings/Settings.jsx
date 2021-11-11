@@ -34,7 +34,7 @@ function Settings(props) {
 
     const [options, addOptions] = useState([{ name: 'EN' ,value:"en" }, { name: 'TA' ,value:"ta" }]);
     const [themes, addTheme] = useState([{ name: 'BLUE' ,value:"#116AE7" }, { name: 'RED' ,value:"#E71B2A" } ,{ name: 'GREEN' ,value:"#00703C" },{ name: 'BLACK' ,value:"#0E1013" },
-        { name: 'YELLOW' ,value:"#ee9819" } ]);
+        { name: 'YELLOW' ,value:"#EE9819" } ]);
 
     return (<div className="Settings">
         <select name="lang" onChange={changeLanguage}>
