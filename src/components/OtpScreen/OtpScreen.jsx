@@ -32,7 +32,7 @@ class OtpScreen extends React.Component {
 
         if(digit1 && digit2 && digit3 && digit4) {
             axios.post(ENDPOINT.VERIFY_OTP,{userId: location.state.userId, otp: ''+digit1+digit2+digit3+digit4}).then(function(response){
-               history.push('/setpassword' , { userId: location.state.userId})
+               history.push('/setpassword' , { userId: location.state.userId});
             }).catch(function (error) {
                 console.log(error);
             })
@@ -71,12 +71,6 @@ class OtpScreen extends React.Component {
                 <input className="otp otp-3" type="text" maxLength="1" onInput={this.changeFocus} ref={this.otp3} />
                 <input className="otp otp-4" type="text" maxLength="1" ref={this.otp4} />
             </div>
-
-           {/* <Link to="/setpassword">
-            <div>
-                <Button name="Confirm" clickHandler={this.submitOtp} />
-            </div>
-        </Link>*/}
 
             <div>
                 <Button name="Confirm" clickHandler={this.submitOtp} />

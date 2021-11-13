@@ -21,12 +21,13 @@ class SelectField extends React.Component {
                     list={list}
                     value={value}
                     placeholder={placeholder}
-                    onInput={() => inputHandler(this.value.current.value)} />
+                    onInput={() => inputHandler(this.value.current.value)}
+                />
             </div>
             <div>
                 <datalist id={list}>
                     {options && options.map((option,index) => {
-                        return  <option key={index}>{option}</option>
+                        return  <option onClick={() => inputHandler(option)} key={index}>{option}</option>
                     })}
 
                 </datalist>

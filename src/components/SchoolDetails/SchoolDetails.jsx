@@ -18,7 +18,8 @@ class SchoolDetails extends React.Component {
             city: '',
             phone:'',
             email:'',
-            address:''
+            address:'',
+            schoolLogo:''
         }
         this.setCountry = this.setCountry.bind(this);
         this.setSchoolName = this.setSchoolName.bind(this);
@@ -28,6 +29,7 @@ class SchoolDetails extends React.Component {
         this.setEmail = this.setEmail.bind(this);
         this.setAddress = this.setAddress.bind(this);
         this.updateSchoolDetails = this.updateSchoolDetails.bind(this);
+        this.onFileChange = this.onFileChange.bind(this);
     }
 
     componentDidMount() {
@@ -65,15 +67,31 @@ class SchoolDetails extends React.Component {
     setAddress(address) {
         this.setState({address: address});
     }
+    onFileChange(event){
+        const formData = new FormData();
+        formData.set('file', event.target.files[0]);
+        const [file] = document.querySelector('#logo').files
+        this.setState({schoolLogo:formData})
+        if (file) {
+            document.querySelector('#schoolLogo').src = URL.createObjectURL(file)
+        }
+    }
 
 
-    updateSchoolDetails() {
+    async updateSchoolDetails() {
 
-        SchoolService.updateSchoolDetails(this.state).then(function (response) {
+       await Promise.all([
+           SchoolService.updateSchoolDetails(window.localStorage.getItem('schoolId'),this.state).then(function (response) {
 
-        }).catch(function (error) {
+           }).catch(function (error) {
 
-        });
+           }),
+           SchoolService.updateSchoolLogo(window.localStorage.getItem('schoolId'),this.state.schoolLogo).then(function (response){
+
+           }).catch(function (error){
+
+           })
+       ])
     }
 
 
@@ -113,13 +131,7 @@ class SchoolDetails extends React.Component {
                 <div className="school-logo-box">
 
                         <label htmlFor="logo" className="btn">Select Image</label>
-                        <input accept="image/png" type="file" id="logo" className="logo-default-button" onChange={() => {
-                                const [file] = document.querySelector('#logo').files
-                                if (file) {
-                                    document.querySelector('#schoolLogo').src = URL.createObjectURL(file)
-                                }
-                            }
-                        } />
+                        <input accept="image/png" type="file" id="logo" className="logo-default-button" onChange={this.onFileChange} />
                         <img width="220" height="220" id="schoolLogo"  src="#" alt="school image" />
 
                 </div>

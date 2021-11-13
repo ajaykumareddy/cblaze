@@ -1,0 +1,46 @@
+*, :after, :before{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+}
+
+:root {
+  --theme:#116AE7;
+}
+
+.staffDetails {
+  padding: 20px;
+  background-color: #F5F7FB;
+  height:100vh;
+  overflow: scroll;
+}
+
+.staffDetailsHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.staffDetailsHeader h3{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.btns{
+  text-align: right;
+  padding:15px 0;
+}
+
+.btns .btnOutline, .btns .btnFill{
+  border:1px solid var(--theme);
+  box-shadow:0px 5px 6px rgba(17, 106, 231, 0.16);
+  border-radius: 3px;
+  padding:7px 55px;
+  font-size: 18px;
+  font-weight: 500;
+  color:var(--theme);
+  transition: all ease 0.4s;
+}
+.btns .btnFill, .btns .btnOutline:hover, .header button:hover{
+  background-color: var(--theme);
+  color: #fff;
+}

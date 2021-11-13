@@ -12,23 +12,13 @@ class Staff extends React.Component {
         return <>
             {data.map((staff,index) => {
                 return <tr>
-                    <td>{ index + 1 }</td>
-                    <td>00123</td>
-                    <td>{staff}</td>
-                    <td>Male</td>
-                    <td>Staff</td>
-                    <td>9874561230</td>
-                    <td>Active</td>
-                    <td>Staff</td>
-                    <td>9874561230</td>
-                    <td>Active</td>
-                    <td>Staff</td>
-                    <td>9874561230</td>
-                    <td>Active</td>
-                    <td>Staff</td>
-                    <td>9874561230</td>
-                    <td>Active</td>
-
+                    <td>{staff.slno }</td>
+                    <td>{staff.employee_id}</td>
+                    <td>{staff.name}</td>
+                    <td>{staff.gender}</td>
+                    <td>{staff.designation}</td>
+                    <td>{staff.phone_number}</td>
+                    <td>{staff.status}</td>
                     <td> v e p d </td>
                 </tr>
             })}

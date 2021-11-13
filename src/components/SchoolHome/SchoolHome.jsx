@@ -10,6 +10,10 @@ import {Route, Switch} from "react-router-dom";
 import Standard from "../Standard/Standard";
 import Test from "../Test/Test";
 import StaffDetails from "../StaffDetails/StaffDetails";
+import StaffDetailsCustomiseForm from "../StaffDetailsCustomiseForm/StaffDetailsCustomiseForm";
+import StaffDetailsPreview from "../StaffDetailsPreview/StaffDetailsPreview";
+import AdminHome from "../Admin/AdminHome/AdminHome";
+import AdminSchoolStandardsInfo from "../Admin/AdminSchoolStandardsInfo/AdminSchoolStandardsInfo";
 
 
 class SchoolHome extends React.Component {
@@ -47,7 +51,10 @@ class SchoolHome extends React.Component {
                                     <StaffDetails />
                                 </Route>
                                 <Route exact path="/school/addStaff">
-
+                                    <StaffDetailsCustomiseForm />
+                                </Route>
+                                <Route exact path="/school/staffpreview">
+                                    <StaffDetailsPreview />
                                 </Route>
                                 </Switch>
                             </div>

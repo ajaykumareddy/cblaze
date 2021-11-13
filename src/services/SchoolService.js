@@ -9,8 +9,17 @@ const SchoolService =  {
         return axios.get(ENDPOINT.SCHOOL_DETAILS,{params: {id : schoolId }});
     },
     updateSchoolDetails: function (schoolId,data) {
-        return axios.put(ENDPOINT.SCHOOL_DETAILS,{data: data},{params: {id: schoolId}});
-    }
+        return axios.put(ENDPOINT.SCHOOL_DETAILS,
+            {name : data.name,email: data.email,phone: data.phone,address: data.address, city:data.city, country:data.country, state:data.state},{params: {id: schoolId}} );
+    },
+    updateSchoolLogo: function(schoolId,data){
+        return axios.post(ENDPOINT.SET_SCHOOL_LOGO,{file:data},{
+            headers: {
+                'content-type': 'multipart/form-data'
+            },
+            params:{id:schoolId}
+        });
+    },
 }
 
 export default SchoolService

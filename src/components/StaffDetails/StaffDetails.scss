@@ -7,12 +7,11 @@
       padding: 0 10px;
       .staff-header-options {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-around;
         div {
-          margin: 5px 2px;
           &.green {
             .Button {
               background-color: #2ED573 !important;
@@ -55,4 +54,47 @@
       }
     }
   }
+}
+
+.dropdown-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dropdown-list {
+  background-color: white;
+  padding: 8px 12px;
+}
+
+/*
+.download-upload-button:hover .download-import-dropdown {
+  display: block;
+}
+
+.download-upload-button .download-import-dropdown{
+ display: none;
+}*/
+
+
+.btn-hvr {
+  margin: 5px 2px;
+  .drp-down {
+    display: none;
+    position: absolute;
+    width: 12%;
+    li:hover {
+      background-color: $base-color;
+    }
+  }
+  &:hover {
+    .drp-down {
+      display: inline;
+    }
+  }
+}
+
+.dailog-header {
+  margin: 5px;
+  text-align: center;
+
 }

@@ -1,0 +1,85 @@
+*, :after, :before{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+}
+
+:root {
+  --theme:#116AE7;
+}
+
+.formCard{
+  padding: 20px 15px 15px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.13);
+  border-radius: 3px;
+  margin:20px 0;
+}
+
+.formCard h4{
+  font-size: 14px;
+  margin: 0 0 15px 10px;
+}
+
+.formCard .inputFields{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.formCard .inputFields .formFieldContainer{
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  margin:0px 10px 20px;
+  width: 190px;
+}
+
+.formCard .inputFields .formFieldContainer input{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  opacity: 0;
+  z-index: 2;
+}
+
+.formCard .inputFields .formFieldContainer input:checked + .formFieldName{
+  background-color: var(--theme);
+  border:1px solid var(--theme);
+}
+
+.formCard .inputFields .formFieldContainer input:checked + .formFieldName p{
+  color:#fff;
+}
+
+.formCard .inputFields .formFieldContainer .formFieldName{
+  text-align: center;
+  width:100%;
+  height:100%;
+  padding:7px 15px;
+  border: 1px solid rgba(43, 45, 66, 0.4);
+  border-radius: 3px;
+  position: relative;
+}
+
+.formCard .inputFields .formFieldContainer .formFieldName:after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  //background-image: url(vector.svg);
+  width: 15px;
+  height: 15px;
+  background-size: 13px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.formCard .inputFields .formFieldContainer .formFieldName p{
+  color:#AAABB3;
+  font-size: 13px;
+  font-weight: 500;
+}

@@ -5,21 +5,26 @@ import Button from "../lib/Button/Button";
 import TextField from "../lib/TextField/TextField";
 import Staff from "./Staff";
 import NoData from "../NoData/NoData";
-import Test from "../Test/Test";
+import Dialog from "../lib/Dialog/Dialog";
+import * as XLSX from 'xlsx';
+import DragAndDrop from "../lib/DragAndDrop/DragAndDrop";
+
 
 class StaffDetails extends React.Component {
     constructor(props) {
         super(props);
 
-        this.data = ["Ajay","Bhanu","Chandu","Eshwar","Franklin","Gowsalya","Hema","Illayaraja","Jeswanth","Keerthi","Lavanya","Manisha","Nitish","Omkar","Prasanth","Quincy","Rakesh","Sri Ram"];
         this.state = {
-            list: this.data,
-            isNew: false
+            list: [],
+            showDialog:false
         };
-
+        this.file = []
 
         this.createStaff = this.createStaff.bind(this);
         this.searchStaff = this.searchStaff.bind(this);
+        this.downloadXlsx = this.downloadXlsx.bind(this)
+        this.uploadFile = this.uploadFile.bind(this)
+        this.setShowDialog = this.setShowDialog.bind(this)
     }
 
 
@@ -35,14 +40,50 @@ class StaffDetails extends React.Component {
         this.setState({list: s});
     }
 
-    render() {
-        let {list,isNew} = this.state;
-        return <div className="StaffDetails">
-            {isNew && <React.Fragment >
-                <Test />
+    async downloadXlsx(){
+        if (this.state.list.length > 0){
+            let wb = XLSX.utils.book_new();
+            let ws = XLSX.utils.json_to_sheet(this.state.list);
 
-            </React.Fragment> }
-            { !isNew && <React.Fragment>
+            XLSX.utils.book_append_sheet(wb, ws, "Staff");
+            await XLSX.writeFile(wb, "staffDetails.xlsx");
+        }
+        else{
+            console.log("No Staff records available")
+        }
+    }
+
+    uploadFile(){
+            new Promise((resolve,reject)=>{
+                const fileReader = new FileReader()
+                fileReader.readAsArrayBuffer(this.file)
+
+                fileReader.onload=(e)=>{
+                    const bufferArray = e.target.result;
+                    const workBook = XLSX.read(bufferArray,{type:'buffer'});
+                    const wsname = workBook.SheetNames[0];
+                    const workSheet = workBook.Sheets[wsname]
+                    const sheetToJSONData = XLSX.utils.sheet_to_json(workSheet);
+                    resolve(sheetToJSONData);
+                };
+                fileReader.onerror = (error) =>{
+                    reject(error);
+                }
+            }).then((fileData)=>{
+                this.setState({list:fileData})
+                this.setState({showDialog:!this.state.showDialog})
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+    setShowDialog(){
+        this.setState({showDialog:!this.state.showDialog})
+    }
+
+
+    render() {
+        let {list} = this.state;
+        return <div className="StaffDetails">
                     <div className="staff-header">
                         <div className="staff-header-title">
                             <h3>Staff Details</h3>
@@ -57,8 +98,16 @@ class StaffDetails extends React.Component {
                             </React.Fragment>
                             }
 
-                            <div className="green">
-                                <Button name="Download/Import" />
+                            <div className={"btn btn-hvr"}>
+                                <Button name="Download/Import" clickHandler={this.showDropDownOptions}/>
+                                {
+                                    <div className={"drp-down"}>
+                                        <ul className={"dropdown-container"}>
+                                            <li className={"dropdown-list"} onClick={this.setShowDialog}>Upload</li>
+                                            <li className={"dropdown-list"} onClick={this.downloadXlsx}>Download</li>
+                                        </ul>
+                                    </div>
+                                }
                             </div>
                             <div>
                                 <Button name="Create New" clickHandler={this.createStaff} />
@@ -67,8 +116,6 @@ class StaffDetails extends React.Component {
                     </div>
                     <div className="staff-body">
                         {list && list.length === 0 && <NoData />}
-
-                        { list && list.length !== 0 && <>
 
                         <div className="staff-category">
                             <span>Non Tech Staff</span>
@@ -85,15 +132,6 @@ class StaffDetails extends React.Component {
                                     <th>Designation</th>
                                     <th>Phone Number</th>
                                     <th>Status</th>
-                                    <th>Designation</th>
-                                    <th>Phone Number</th>
-                                    <th>Status</th>
-                                    <th>Designation</th>
-                                    <th>Phone Number</th>
-                                    <th>Status</th>
-                                    <th>Designation</th>
-                                    <th>Phone Number</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -103,9 +141,23 @@ class StaffDetails extends React.Component {
                             </table>
 
                         </div>
-                        </>}
                     </div>
-            </React.Fragment> }
+            {this.state.showDialog?<Dialog closeHandler={() => {this.setShowDialog(false)}}>
+                <div className={"dialog-container"}>
+                    <div className={"dailog-header"}>
+                        <h3>Upload File</h3>
+                    </div><hr/>
+                    <div>
+                        <input type="file" onChange={(e)=>{
+                            this.file = e.target.files[0]
+                        }}/>
+                    </div>
+                    <DragAndDrop/>
+                    <div>
+                        <Button name={"Submit"} clickHandler={ this.uploadFile}/>
+                    </div>
+                </div>
+            </Dialog>:null}
             </div>
     }
 }

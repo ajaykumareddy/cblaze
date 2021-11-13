@@ -36,9 +36,9 @@ class Login extends React.Component {
         AuthService.login({email: email, password: password})
             .then(function(response) {
                 AuthService.setAccessToken(response.data.access_token);
-                window.localStorage.setItem('userId',response.data.user.id);
-                window.localStorage.setItem('schoolId',response.data.user.school_id);
-                history.push('/school',{});
+                window.localStorage.setItem('userId',response.data.user_id);
+                window.localStorage.setItem('schoolId',response.data.school_id);
+                history.push('/school/details',{});
             }).catch(function (error) {
             self.setState({error: "Invalid Credentials"});
         });
