@@ -1,6 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://192.168.3.92:8000';
+//axios.defaults.baseURL = 'http://192.168.3.92:8000';
+axios.defaults.baseURL = 'http://admin.iims.schoolec.in/'
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
     if(window.localStorage.getItem('token') && window.localStorage.getItem('token').length != 0) {
